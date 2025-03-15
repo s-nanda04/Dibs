@@ -43,15 +43,32 @@ struct SignUpView: View {
             
             TextField("Enter your email", text: $email)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.emailAddress)
                 .padding()
             
             SecureField("Enter your password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
+                .autocapitalization(.none)  // Disable automatic capitalization
+                .disableAutocorrection(true)  // Disable autocorrection
+                .textContentType(.password)
                 .padding()
             
             SecureField("Confirm your password", text: $confirmPassword)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+            
+            Button(action: {
+                print("Sign Up pressed")
+            }) {
+                Text("Sign Up")
+                    .foregroundColor(Color.black)
+                    .bold()
+                    .padding()
+                    .frame(maxWidth: 200)
+                    .background(Color(red: 0.941, green: 0.627, blue: 0.965))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 95.0)
+            }
         }
     }
 }
