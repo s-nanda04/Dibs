@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  LandingView.swift
 //  Dibs
 //
 //  Created by Minesh Sumair on 3/15/25.
@@ -7,24 +7,20 @@
 
 import SwiftUI
 
-struct ContentView: View {
+struct LandingView: View {
     var body: some View {
         VStack {
-            Image("DibsLogo")
+            Image(.dibslogo)
+                .resizable()
                 .scaledToFit()
-                
-            Text("Dibs!")
-                .font(.system(size: 80, design: .rounded))
-                .bold(true)
-                .foregroundColor(.purple)
-            Text("Thrift on Campus")
+                .frame(width: .infinity)
             
             Text("Sign In")
                 .font(.headline)
                     .foregroundColor(.black)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.purple.opacity(0.4))
+                    .background(Color(red: 0.941, green: 0.627, blue: 0.965))
                     .cornerRadius(10)
                     .padding(.horizontal, 95.0)
             
@@ -34,14 +30,16 @@ struct ContentView: View {
                     .foregroundColor(.black)
                     .padding()
                     .frame(maxWidth: .infinity)
-                    .background(Color.purple.opacity(0.4))
+                    .background(Color(red: 0.941, green: 0.627, blue: 0.965))
                     .cornerRadius(10)
                     .padding(.horizontal, 95.0)
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(red: 0.812, green: 0.937, blue: 0.988))
     }
 }
 
 #Preview {
-    ContentView()
+    LandingView()
 }
