@@ -10,12 +10,35 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            Image("DibsLogo")
+                .scaledToFit()
+                
+            Text("Dibs!")
+                .font(.system(size: 80, design: .rounded))
+                .bold(true)
+                .foregroundColor(.purple)
+            Text("Thrift on Campus")
+            
+            Text("Sign In")
+                .font(.headline)
+                    .foregroundColor(.black)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.purple.opacity(0.4))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 95.0)
+            
+            NavigationLink(destination: SignUpView()) {
+                Text("Sign Up")
+                    .font(.headline)
+                    .foregroundColor(.black)
+                    .padding()
+                    .frame(maxWidth: .infinity)
+                    .background(Color.purple.opacity(0.4))
+                    .cornerRadius(10)
+                    .padding(.horizontal, 95.0)
+            }
         }
-        .padding()
     }
 }
 
