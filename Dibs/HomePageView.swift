@@ -12,11 +12,11 @@ struct HomePageView: View {
     @State private var searchText: String = ""
     @State private var selectedCategory: String = "All"
     @State private var items: [Item] = [
-        Item(name: "Shirt", price: 15.99, image: "shirt", description: "A stylish shirt"),
-        Item(name: "Chair", price: 39.99, image: "chair", description: "Comfortable chair"),
-        Item(name: "Backpack", price: 25.49, image: "backpack", description: "A handy backpack"),
-        Item(name: "Desk", price: 89.99, image: "desk", description: "Work desk"),
-        Item(name: "Notebook", price: 5.99, image: "notebook", description: "A notebook for notes")
+        Item(name: "Shirt", price: 15.99, image: "Shirt", description: "A stylish shirt"),
+        Item(name: "Chair", price: 39.99, image: "Chair", description: "Comfortable chair"),
+        Item(name: "Backpack", price: 25.49, image: "Backpack", description: "A handy backpack"),
+        Item(name: "Desk", price: 89.99, image: "Desk", description: "Work desk"),
+        Item(name: "Notebook", price: 5.99, image: "Notebook", description: "A notebook for notes")
     ]
     
     let categories = ["Clothes", "Furniture", "Supplies"]
