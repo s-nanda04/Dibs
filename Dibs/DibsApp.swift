@@ -9,13 +9,8 @@ import SwiftUI
 
 @main
 struct DibsApp: App {
-    
-    @StateObject private var cartManager = CartManager()
-
     var body: some Scene {
         WindowGroup {
-            HomePageView()
-            .environmentObject(cartManager) // Inject the cart globally
             LandingView()
         }
     }

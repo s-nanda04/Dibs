@@ -120,7 +120,9 @@ struct HomePageView: View {
                             .cornerRadius(10)
                     }
 
-                    NavigationLink(destination: CartPageView()) {
+                    Button(action: {
+                        // Navigate to Cart Page
+                    }) {
                         Text("Cart")
                             .frame(maxWidth: .infinity)
                             .padding()
