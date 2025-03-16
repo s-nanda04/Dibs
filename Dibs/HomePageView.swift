@@ -33,6 +33,12 @@ struct HomePageView: View {
         GridItem(.flexible())
     ]
     
+    func loadImage(named imageName: String) -> UIImage? {
+        let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageName)
+        return UIImage(contentsOfFile: url.path)
+    }
+
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -77,11 +83,20 @@ struct HomePageView: View {
                     ForEach(items) { item in
                         VStack {
                             // Load the image using the image name
-                            Image(item.image)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 130, height: 100)
-                                .cornerRadius(10)
+                            if let uiImage = loadImage(named: item.image) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 130, height: 100)
+                                    .cornerRadius(10)
+                            } else {
+                                Image(item.image) // Fallback for asset images
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 130, height: 100)
+                                    .cornerRadius(10)
+                            }
+
                             Text(item.name)
                                 .font(.headline)
                             Text("$\(item.price, specifier: "%.2f")")

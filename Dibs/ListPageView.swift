@@ -17,6 +17,7 @@ struct ListPageView: View {
     @State private var itemDescription: String = ""
     
     @Environment(\.presentationMode) var presentationMode // To dismiss the view after listing
+    
 
     var body: some View {
         VStack(spacing: 20) {
@@ -86,20 +87,30 @@ struct ListPageView: View {
     // Function to list the new item
     func listNewItem() {
         guard let price = Double(itemPrice), !itemName.isEmpty else {
-            print("Invalid input") // Handle empty name or invalid price
+            print("Invalid input")
             return
         }
 
-        // If an image is selected, use it, otherwise, use a default name for the image
-        let imageName = selectedImage != nil ? "selected_image" : "default_image" // Replace with actual image name logic
+        var imageName = "default_image" // Default placeholder
+        
+        if let selectedImage = selectedImage {
+            imageName = saveImageToDocuments(image: selectedImage)
+        }
 
-        // Create a new item and append it to the items array
         let newItem = Item(name: itemName, price: price, image: imageName, description: itemDescription)
         items.append(newItem)
-
-        // Dismiss the ListPageView and return to HomePageView
         presentationMode.wrappedValue.dismiss()
     }
+
+    func saveImageToDocuments(image: UIImage) -> String {
+        let imageName = UUID().uuidString + ".jpg"
+        if let data = image.jpegData(compressionQuality: 0.8) {
+            let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageName)
+            try? data.write(to: url)
+        }
+        return imageName
+    }
+
 }
 
 #Preview {
