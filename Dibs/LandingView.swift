@@ -15,6 +15,7 @@ struct LandingView: View {
                     .resizable()
                     .scaledToFit()
                     .frame(width: .infinity)
+
                 
                 Text("Sign In")
                     .font(.headline)
