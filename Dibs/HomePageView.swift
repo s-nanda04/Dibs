@@ -1,10 +1,3 @@
-//
-//  BuyingPageView.swift
-//  Dibs
-//
-//  Created by minesh sumair on 3/15/25.
-//
-
 import SwiftUI
 
 struct Item: Identifiable {
@@ -38,7 +31,6 @@ struct HomePageView: View {
         return UIImage(contentsOfFile: url.path)
     }
 
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -81,31 +73,35 @@ struct HomePageView: View {
                 // Grid of Items (2 per row, max 5 items)
                 LazyVGrid(columns: columns, spacing: 20) {
                     ForEach(items) { item in
-                        VStack {
-                            // Load the image using the image name
-                            if let uiImage = loadImage(named: item.image) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 130, height: 100)
-                                    .cornerRadius(10)
-                            } else {
-                                Image(item.image) // Fallback for asset images
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 130, height: 100)
-                                    .cornerRadius(10)
-                            }
+                        NavigationLink(destination: ItemDetailView(item: item)) { // NavigationLink to ItemDetailView
+                            VStack {
+                                // Load the image using the image name
+                                if let uiImage = loadImage(named: item.image) {
+                                    Image(uiImage: uiImage)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 130, height: 100)
+                                        .cornerRadius(10)
+                                } else {
+                                    Image(item.image) // Fallback for asset images
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 130, height: 100)
+                                        .cornerRadius(10)
+                                }
 
-                            Text(item.name)
-                                .font(.headline)
-                            Text("$\(item.price, specifier: "%.2f")")
-                                .font(.subheadline)
+                                Text(item.name)
+                                    .font(.headline)
+                                    .foregroundColor(.black)
+                                Text("$\(item.price, specifier: "%.2f")")
+                                    .font(.subheadline)
+                                    .foregroundColor(.black)
+                            }
+                            .padding()
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(radius: 5)
                         }
-                        .padding()
-                        .background(Color.white)
-                        .cornerRadius(10)
-                        .shadow(radius: 5)
                     }
                 }
                 .padding()
