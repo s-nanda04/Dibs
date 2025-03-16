@@ -73,7 +73,7 @@ struct SignUpView: View {
                         }
                     }
                     .navigationDestination(isPresented: $navigateToBuyingPage) {
-                        BuyingPageView()  // Navigates to the new SwiftUI file
+                        HomePageView()  // Navigates to the new SwiftUI file
                     }
                 }
             }
