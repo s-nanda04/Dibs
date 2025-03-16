@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct ItemDetailView: View {
-    let item: Item  // Item model passed from HomePageView
-    
-    // Helper function to load the image from the document directory
+    let item: Item
+    @EnvironmentObject var cartManager: CartManager  // Shared cart instance
+
     func loadImage(named imageName: String) -> UIImage? {
         let url = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent(imageName)
         return UIImage(contentsOfFile: url.path)
@@ -22,8 +22,7 @@ struct ItemDetailView: View {
                 .font(.title)
                 .fontWeight(.bold)
                 .padding(.top)
-            
-            // Load image from document directory
+
             if let uiImage = loadImage(named: item.image) {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -32,7 +31,6 @@ struct ItemDetailView: View {
                     .shadow(color: Color.black.opacity(0.2), radius: 5, x: 2, y: 2)
                     .padding()
             } else {
-                // Fallback if image is not found
                 Rectangle()
                     .fill(Color.gray.opacity(0.3))
                     .frame(width: 200, height: 150)
@@ -40,21 +38,21 @@ struct ItemDetailView: View {
                     .cornerRadius(10)
                     .padding()
             }
-            
-            Text("$\(String(format: "%.2f", item.price))") // Display price
+
+            Text("$\(String(format: "%.2f", item.price))")
                 .font(.title2)
                 .fontWeight(.semibold)
                 .foregroundColor(.green)
                 .padding(.bottom, 5)
-            
+
             Text(item.description)
                 .font(.body)
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 20)
                 .padding(.bottom, 20)
-            
+
             Button(action: {
-                // TODO: Add logic to add item to cart
+                cartManager.addToCart(item: item)
                 print("\(item.name) added to cart!")
             }) {
                 Text("Add to Cart")
@@ -65,10 +63,10 @@ struct ItemDetailView: View {
                     .background(Color.blue)
                     .cornerRadius(10)
             }
-            
+
             Spacer()
         }
-        .navigationBarTitle(item.name, displayMode: .inline) // Set the navigation title to the item name
+        .navigationBarTitle(item.name, displayMode: .inline)
     }
 }
 
